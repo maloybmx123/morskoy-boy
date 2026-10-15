@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#071a33"><title>Морской бой — онлайн</title><link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header><div class="brand">⚓ <span>Морской бой</span></div><div class="tag">ОНЛАЙН · КРОССПЛАТФОРМЕННЫЙ</div></header>
+<main>
+<section id="setup" class="panel">
+  <h1>Собери команду. Начни бой.</h1><p class="muted">Работает в браузере на Android, iPhone и Windows.</p>
+  <div class="setup-grid">
+    <div class="field"><label for="name">Твоё имя</label><input id="name" maxlength="24" placeholder="Например, Капитан" value=""></div>
+    <div class="field"><label for="size">Размер поля</label><select id="size"><option value="6">6 × 6</option><option value="8">8 × 8</option><option value="10" selected>10 × 10</option><option value="12">12 × 12</option><option value="15">15 × 15</option><option value="20">20 × 20</option></select></div>
+    <div class="field"><label for="maxPlayers">Игроков в комнате</label><select id="maxPlayers"><option>2</option><option selected>4</option><option>6</option><option>8</option></select></div>
+    <div class="field"><label for="fleetPreset">Флот</label><select id="fleetPreset"><option value="classic" selected>Классический</option><option value="small">Небольшой флот</option><option value="custom">Свой состав</option></select></div>
+  </div>
+  <div id="customFleet" class="field hidden"><label for="fleetText">Длины кораблей через запятую (например: 4,3,3,2,2,1)</label><input id="fleetText" value="4,3,3,2,2,1"></div>
+  <label class="toggle"><input type="checkbox" id="extraShot" checked> При попадании — ещё один выстрел</label>
+  <div class="actions"><button id="createBtn" class="primary">Создать комнату</button><div class="joinline"><input id="roomCode" placeholder="КОД КОМНАТЫ" maxlength="6" autocapitalize="characters"><button id="joinBtn">Войти</button></div></div>
+  <p class="hint">Создатель задаёт настройки. Чтобы играть с друзьями через интернет, эту игру нужно разместить на общедоступном хостинге с поддержкой WebSocket.</p>
+</section>
+<section id="lobby" class="panel hidden">
+  <div class="roomhead"><div><span class="eyebrow">КОД КОМНАТЫ</span><div class="roomcode" id="roomCodeShow">------</div></div><button id="copyBtn" class="secondary">Копировать код</button></div>
+  <p class="muted" id="roomDescription"></p>
+  <h2>Экипаж</h2><div id="players" class="players"></div>
+  <div class="placement">
+    <div><h2>Расставь корабли</h2><p class="muted">Нажми «Авторасстановка» или расставь корабли вручную: выбери длину, затем клетки на поле.</p></div>
+    <div class="place-actions"><select id="shipSelect" aria-label="Длина корабля"></select><button id="rotateBtn" class="secondary">↻ Повернуть</button><button id="autoBtn" class="secondary">Авторасстановка</button></div>
+  </div>
+  <div id="ownBoard" class="board-wrap"></div>
+  <div class="actions"><button id="readyBtn" class="primary">Готов к бою</button><button id="clearBtn" class="secondary">Очистить поле</button></div>
+  <p id="fleetStatus" class="hint"></p>
+</section>
+<section id="game" class="panel hidden">
+  <div class="gamehead"><div><span class="eyebrow">КОМНАТА</span><div class="roomcode small" id="gameCode"></div></div><div id="turnStatus" class="turn-status">Ожидание…</div></div>
+  <div id="scoreboard" class="players"></div>
+  <h2>Выбери противника</h2><div id="targets" class="targets"></div>
+  <h2 id="targetTitle">Поле противника</h2><p class="muted">Коснись клетки, чтобы выстрелить. Чужие корабли скрыты.</p>
+  <div id="enemyBoard" class="board-wrap"></div>
+  <h2>Твоё поле</h2><div id="myBoard" class="board-wrap"></div>
+  <div id="log" class="log" aria-live="polite"></div>
+</section>
+<div id="toast" class="toast hidden"></div>
+</main>
+<footer>Морской бой · Играйте честно и не забывайте про флот ⚓</footer>
+<script src="app.js"></script>
+</body></html>
